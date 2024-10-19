@@ -1,0 +1,43 @@
+.machine-list {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .login-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: #45a049;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: #f9f9f9;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
