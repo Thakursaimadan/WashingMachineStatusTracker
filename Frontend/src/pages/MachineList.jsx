@@ -1,91 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './machineList.css'; // CSS for styling
+"use client"
+
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { Link } from "react-router-dom"
 
 const MachineList = () => {
-  const [machines, setMachines] = useState([]);
-  const [feedback, setFeedback] = useState('');
-  const [selectedMachineId, setSelectedMachineId] = useState(null);
+  const [machines, setMachines] = useState([])
+  const [feedback, setFeedback] = useState("")
+  const [selectedMachineId, setSelectedMachineId] = useState(null)
 
-  // Fetch machine data from the backend
   const fetchMachines = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/machines');
-      setMachines(response.data);
+      const response = await axios.get("http://localhost:5000/api/machines")
+      setMachines(response.data)
     } catch (error) {
-      console.error('Error fetching machines:', error);
+      console.error("Error fetching machines:", error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchMachines(); // Initial fetch
+    fetchMachines()
+    const intervalId = setInterval(fetchMachines, 10000)
+    return () => clearInterval(intervalId)
+  }, [fetchMachines]) // Added fetchMachines to dependencies
 
-    // Optional: Polling every 10 seconds to keep the data up to date
-    const intervalId = setInterval(() => {
-      fetchMachines();
-    }, 10000); // Fetch data every 10 seconds
-
-    return () => clearInterval(intervalId); // Cleanup on component unmount
-  }, []);
-
-  // Handle feedback submission
   const handleSubmitFeedback = async (machineId) => {
     try {
-      await axios.post(`http://localhost:5000/api/machines/feedback/${machineId}`, { feedback });
-      alert('Feedback submitted successfully!');
-      setFeedback('');
-      setSelectedMachineId(null);
-      fetchMachines(); // Refresh data after feedback submission
+      await axios.post(`http://localhost:5000/api/machines/feedback/${machineId}`, { feedback })
+      alert("Feedback submitted successfully!")
+      setFeedback("")
+      setSelectedMachineId(null)
+      fetchMachines()
     } catch (error) {
-      console.error('Error submitting feedback:', error);
+      console.error("Error submitting feedback:", error)
     }
-  };
+  }
 
   return (
-    <div className="machine-list-container">
-      <header className="header">
-        <h1>Available Washing Machines</h1>
-        <Link to="/login">
-          <button className="login-button">Admin Login</button>
-        </Link>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-blue-600 text-white p-4 shadow-md">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Available Washing Machines</h1>
+          <Link to="/login">
+            <button className="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-blue-100 transition duration-300">
+              Admin Login
+            </button>
+          </Link>
+        </div>
       </header>
 
-      <div className="machine-list">
-        {machines.map((machine) => (
-          <div className="machine-card" key={machine._id}>
-            <h3>Machine ID: {machine.machineId}</h3>
-            <p>Status: {machine.status === 'In Use' ? 'In Use' : 'Available'}</p>
-
-            {/* Feedback Button */}
-            <button
-              className="feedback-button"
-              onClick={() => setSelectedMachineId(machine._id)}
+      <main className="container mx-auto mt-8 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {machines.map((machine) => (
+            <div
+              key={machine._id}
+              className="bg-white rounded-lg shadow-md p-6 transition duration-300 hover:shadow-lg"
             >
-              Give Feedback
-            </button>
-
-            {/* Feedback Form (Visible only when the feedback button is clicked) */}
-            {selectedMachineId === machine._id && (
-              <div className="feedback-form">
-                <textarea
-                  placeholder="Enter your feedback"
-                  value={feedback}
-                  onChange={(e) => setFeedback(e.target.value)}
-                />
-                <button
-                  className="submit-feedback-button"
-                  onClick={() => handleSubmitFeedback(machine._id)}
-                >
-                  Submit Feedback
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+              <h3 className="text-xl font-semibold mb-2">Machine ID: {machine.machineId}</h3>
+              <p className={`text-lg mb-4 ${machine.status === "In Use" ? "text-red-500" : "text-green-500"}`}>
+                Status: {machine.status}
+              </p>
+              <button
+                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+                onClick={() => setSelectedMachineId(machine._id)}
+              >
+                Give Feedback
+              </button>
+              {selectedMachineId === machine._id && (
+                <div className="mt-4">
+                  <textarea
+                    className="w-full p-2 border rounded-md"
+                    placeholder="Enter your feedback"
+                    value={feedback}
+                    onChange={(e) => setFeedback(e.target.value)}
+                  />
+                  <button
+                    className="w-full mt-2 bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-300"
+                    onClick={() => handleSubmitFeedback(machine._id)}
+                  >
+                    Submit Feedback
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </main>
     </div>
-  );
-};
+  )
+}
 
-export default MachineList;
+export default MachineList
+
