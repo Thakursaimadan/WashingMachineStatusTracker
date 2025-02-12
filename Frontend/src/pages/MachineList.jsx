@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
-import { LuWashingMachine } from "react-icons/lu";
+import { LuWashingMachine } from "react-icons/lu"
+import { FaCheckCircle, FaTimesCircle, FaCommentDots } from "react-icons/fa"
 
 const MachineList = () => {
   const [machines, setMachines] = useState([])
@@ -23,7 +24,7 @@ const MachineList = () => {
     fetchMachines()
     const intervalId = setInterval(fetchMachines, 10000)
     return () => clearInterval(intervalId)
-  }, [fetchMachines]) // Added fetchMachines to dependencies
+  }, [])
 
   const handleSubmitFeedback = async (machineId) => {
     try {
@@ -38,61 +39,60 @@ const MachineList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      
-      <header className="bg-blue-600 text-white p-4 shadow-md">
-        
-        <div className="container mx-auto flex justify-between items-center">
-        <LuWashingMachine className="text-yellow-400 h-12"/>
-          <h1 className="text-2xl font-bold">Available Washing Machines</h1>
-          <Link to="/login">
-            <button className="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-blue-100 transition duration-300">
-              Admin Login
-            </button>
-          </Link>
+    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-blue-700 text-white py-12 px-4 sm:px-6 lg:px-8">
+      <header className="bg-white text-blue-600 p-6 shadow-lg rounded-lg max-w-4xl mx-auto flex justify-between items-center">
+        <div className="flex items-center gap-4">
+          <LuWashingMachine className="text-blue-500 h-12 w-12" />
+          <h1 className="text-3xl font-bold">Available Washing Machines</h1>
         </div>
+        <Link to="/login">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
+            Admin Login
+          </button>
+        </Link>
       </header>
 
-      <main className="container mx-auto mt-8 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {machines.map((machine) => (
-            <div
-              key={machine._id}
-              className="bg-white rounded-lg shadow-md p-6 transition duration-300 hover:shadow-lg"
+      <main className="container mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {machines.map((machine) => (
+          <div
+            key={machine._id}
+            className="bg-white bg-opacity-90 backdrop-blur-md rounded-xl shadow-md p-6 transition duration-300 hover:shadow-lg text-gray-900"
+          >
+            <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+              <LuWashingMachine className="text-blue-500" /> Machine {machine.machineId}
+            </h3>
+            <p
+              className={`text-lg font-semibold flex items-center gap-2 ${machine.status === "In Use" ? "text-red-500" : "text-green-500"}`}
             >
-              <h3 className="text-xl font-semibold mb-2">Machine ID: {machine.machineId}</h3>
-              <p className={`text-lg mb-4 ${machine.status === "In Use" ? "text-red-500" : "text-green-500"}`}>
-                Status: {machine.status}
-              </p>
-              <button
-                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
-                onClick={() => setSelectedMachineId(machine._id)}
-              >
-                Give Feedback
-              </button>
-              {selectedMachineId === machine._id && (
-                <div className="mt-4">
-                  <textarea
-                    className="w-full p-2 border rounded-md"
-                    placeholder="Enter your feedback"
-                    value={feedback}
-                    onChange={(e) => setFeedback(e.target.value)}
-                  />
-                  <button
-                    className="w-full mt-2 bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-300"
-                    onClick={() => handleSubmitFeedback(machine._id)}
-                  >
-                    Submit Feedback
-                  </button>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+              {machine.status === "In Use" ? <FaTimesCircle /> : <FaCheckCircle />} Status: {machine.status}
+            </p>
+            <button
+              className="w-full mt-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300 flex items-center justify-center gap-2"
+              onClick={() => setSelectedMachineId(machine._id)}
+            >
+              <FaCommentDots /> Give Feedback
+            </button>
+            {selectedMachineId === machine._id && (
+              <div className="mt-4">
+                <textarea
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Enter your feedback"
+                  value={feedback}
+                  onChange={(e) => setFeedback(e.target.value)}
+                />
+                <button
+                  className="w-full mt-2 bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-300"
+                  onClick={() => handleSubmitFeedback(machine._id)}
+                >
+                  Submit Feedback
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
       </main>
     </div>
   )
 }
 
 export default MachineList
-
