@@ -13,7 +13,7 @@ const Feedback = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`http://localhost:5000/api/feedback/${id}`, { user, comment })
+      await axios.post(`https://washingmachinestatustracker-backend.onrender.com/api/feedback/${id}`, { user, comment })
       alert("Feedback submitted!")
       navigate("/")
     } catch (error) {

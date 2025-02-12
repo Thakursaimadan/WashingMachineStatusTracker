@@ -13,7 +13,7 @@ const MachineList = () => {
 
   const fetchMachines = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/machines")
+      const response = await axios.get("https://washingmachinestatustracker-backend.onrender.com/api/machines")
       setMachines(response.data)
     } catch (error) {
       console.error("Error fetching machines:", error)
@@ -28,7 +28,7 @@ const MachineList = () => {
 
   const handleSubmitFeedback = async (machineId) => {
     try {
-      await axios.post(`http://localhost:5000/api/machines/feedback/${machineId}`, { feedback })
+      await axios.post(`https://washingmachinestatustracker-backend.onrender.com/api/feedback/${machineId}`, { feedback })
       alert("Feedback submitted successfully!")
       setFeedback("")
       setSelectedMachineId(null)

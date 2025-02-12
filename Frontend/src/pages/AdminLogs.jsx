@@ -10,7 +10,7 @@ const AdminLogs = ({ machineId }) => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/admin/logs/${machineId}`, {
+        const response = await axios.get(`https://washingmachinestatustracker-backend.onrender.com/api/logs/${machineId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

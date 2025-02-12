@@ -11,7 +11,7 @@ const FeedbackList = () => {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/machines/feedback/${machineId}`);
+        const response = await axios.get(`https://washingmachinestatustracker-backend.onrender.com/api/feedback/${machineId}`)
         setFeedbacks(response.data.feedbacks);
       } catch (error) {
         console.error("Error fetching feedbacks:", error);

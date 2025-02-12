@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMachines = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/machines")
+        const response = await axios.get("https://washingmachinestatustracker-backend.onrender.com/api/machines")
         setMachines(response.data)
       } catch (error) {
         console.error("Failed to fetch machines:", error)
