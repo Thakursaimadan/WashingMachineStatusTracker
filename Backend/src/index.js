@@ -27,7 +27,11 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+    origin: "https://your-frontend.onrender.com", // Allow only your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  }));
 
 app.use(express.json()); // Parse JSON bodies
 app.use('/api/machines', Machinerouter);

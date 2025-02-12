@@ -1,9 +1,7 @@
 //coder1729c
 //JaiPsrKga2TzXz2h
 
-/*
-the below function helps us to connect server
-*/
+
 const mongoose=require('mongoose');
 const serverconfig=require('./serverconfig');
 async function connectDB()
