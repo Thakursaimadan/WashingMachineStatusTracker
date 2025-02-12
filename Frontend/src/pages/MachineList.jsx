@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import { LuWashingMachine } from "react-icons/lu";
 
 const MachineList = () => {
   const [machines, setMachines] = useState([])
@@ -38,8 +39,11 @@ const MachineList = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      
       <header className="bg-blue-600 text-white p-4 shadow-md">
+        
         <div className="container mx-auto flex justify-between items-center">
+        <LuWashingMachine className="text-yellow-400 h-12"/>
           <h1 className="text-2xl font-bold">Available Washing Machines</h1>
           <Link to="/login">
             <button className="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-blue-100 transition duration-300">
