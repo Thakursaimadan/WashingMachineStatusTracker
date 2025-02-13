@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import axiosInstance from "../api/axiosInstance"
+import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
@@ -13,7 +13,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const { data } = await axiosInstance.post("/api/admin/login", { username, password })
+      const { data } = await axios.post("https://washingmachinestatustracker-backend.onrender.com/api/admin/login", { username, password })
       localStorage.setItem("token", data.token)
       navigate("/dashboard")
     } catch (err) {

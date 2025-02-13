@@ -2,14 +2,14 @@
 
 import { useState } from "react"
 import axiosInstance from "../api/axiosInstance"
-
+import axios from "axios"
 const AddMachineForm = () => {
   const [machineId, setMachineId] = useState("")
 
   const handleAddMachine = async (e) => {
     e.preventDefault()
     try {
-      await axiosInstance.post("/machines", { machineId, status: "Available" })
+      await axios.post("https://washingmachinestatustracker-backend.onrender.com/api/machines", { machineId, status: "Available" })
       alert("Machine added successfully!")
       setMachineId("") // Clear the input after successful addition
     } catch (err) {
