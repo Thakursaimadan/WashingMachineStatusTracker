@@ -28,7 +28,7 @@ const MachineList = () => {
 
   const handleSubmitFeedback = async (machineId) => {
     try {
-      await axios.post(`https://washingmachinestatustracker-backend.onrender.com/api/feedback/${machineId}`, { feedback })
+      await axios.post(`https://washingmachinestatustracker-backend.onrender.com/api/machines/feedback/${machineId}`, { feedback })
       alert("Feedback submitted successfully!")
       setFeedback("")
       setSelectedMachineId(null)
