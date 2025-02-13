@@ -13,7 +13,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const { data } = await axiosInstance.post("/login", { username, password })
+      const { data } = await axiosInstance.post("/api/admin/login", { username, password })
       localStorage.setItem("token", data.token)
       navigate("/dashboard")
     } catch (err) {
