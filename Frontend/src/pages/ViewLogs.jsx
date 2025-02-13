@@ -11,7 +11,7 @@ const MachineLogs = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await axios.get(`https://washingmachinestatustracker-backend.onrender.com/api/logs/${machineId}`);
+        const response = await axios.get(`https://washingmachinestatustracker-backend.onrender.com/api/machines/logs/${machineId}`);
         setLogs(response.data.logs);
       } catch (error) {
         console.error("Error fetching logs:", error);

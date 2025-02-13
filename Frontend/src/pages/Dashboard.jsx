@@ -39,7 +39,7 @@ const Dashboard = () => {
 
   const updateMachineStatus = async (id, newStatus) => {
     try {
-      await axios.put(`https://washingmachinestatustracker-backend.onrender.com/api/machines/${id}`, {
+      await axios.put(`https://washingmachinestatustracker-backend.onrender.com/api/machines/toggle/${id}`, {
         status: newStatus,
         roll: studentInfo.roll,
         name: studentInfo.name,
