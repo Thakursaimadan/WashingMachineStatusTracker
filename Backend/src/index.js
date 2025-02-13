@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 const cors = require('cors');
 app.use(cors({
-    origin: "https://your-frontend.onrender.com", // Allow only your frontend URL
+    origin: "https://washingmachinestatustracker.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
   }));
