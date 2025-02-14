@@ -19,8 +19,8 @@ Machinerouter.post('/add', authenticateToken, async (req, res) => {
   }
 });
 
-// Get all machines' status
-Machinerouter.get('/', async (req, res) => {
+// Get all machines status
+Machinerouter.get('/', async (req, res) => {  
   try {
     const machines = await Machine.find();
     res.json(machines);
