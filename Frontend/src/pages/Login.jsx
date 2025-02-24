@@ -28,6 +28,7 @@ const Login = () => {
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Admin Login</h2>
         </div>
+        <p> use username-madan  password-2005 to login<br/><br/></p>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
