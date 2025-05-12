@@ -18,7 +18,6 @@ This is a **Washing Machine Status Tracker** built using the **MERN stack** (Mon
 - **React**: Frontend framework for creating the user interface.
 - **Node.js**: Backend runtime for handling server-side logic.
 
-## Project Structure
 
 ## Getting Started
 
