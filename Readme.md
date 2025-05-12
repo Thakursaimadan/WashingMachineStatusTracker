@@ -1,6 +1,10 @@
 # Washing Machine Status Tracker
 
 This is a **Washing Machine Status Tracker** built using the **MERN stack** (MongoDB, Express.js, React, Node.js). The platform allows students in a hostel to check whether a washing machine is free or occupied, and admins can view user logs and feedback for each machine.
+## 🌐 Live Demo
+
+👉 [Try it Live](https://washingmachinestatustracker.onrender.com/)
+
 
 ## Features
 
